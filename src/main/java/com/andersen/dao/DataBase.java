@@ -15,6 +15,7 @@ public class DataBase {
             String SQL = "CREATE SCHEMA jdbcCRUD";
             Statement statement = ConnectorDB.getConnection().createStatement();
             statement.execute(SQL);
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -26,6 +27,7 @@ public class DataBase {
             String SQL = "CREATE TABLE jdbccrud.peopleList (id INT NOT NULL AUTO_INCREMENT, name VARCHAR(20) NOT NULL, surName VARCHAR(20) NOT NULL," +
                     "age INT NOT NULL, phone VARCHAR(20), PRIMARY KEY (id))";
             statement.execute(SQL);
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -42,6 +44,7 @@ public class DataBase {
             preparedStatement.setInt(3, people.getAge());
             preparedStatement.setString(4, people.getPhone());
             preparedStatement.execute();
+            preparedStatement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -63,6 +66,7 @@ public class DataBase {
                 people.setPhone(resultSet.getString("phone"));
                 System.out.println(people.toString());
             }
+            preparedStatement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -86,6 +90,7 @@ public class DataBase {
             preparedStatement.setString(1, newPhone);
             preparedStatement.setString(2, name+"%");
             preparedStatement.executeUpdate();
+            preparedStatement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
